@@ -4,7 +4,7 @@ CREATE TABLE `users` (
     `user_password` VARCHAR(50) NOT NULL,
     `user_nickname` VARCHAR(50) NOT NULL,
     `profile_image_url` VARCHAR(100),
-    `profile_state_message` VARCHAR(300),
+    `profile_status_message` VARCHAR(300),
     `left_messenger` TINYINT(1) NOT NULL DEFAULT 0,
     `signup_date` DATE NOT NULL,
     PRIMARY KEY (`id`),
@@ -20,19 +20,18 @@ CREATE TABLE `channels` (
     `left_messenger` TINYINT(1) NOT NULL DEFAULT 0,
     `channel_creation_date` DATE NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`channel_creator`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-    UNIQUE KEY (`channel_name`)
+    FOREIGN KEY (`channel_creator`) REFERENCES `users`(`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `chats` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `chat_content` VARCHAR(300) NOT NULL,
     `chat_author` VARCHAR(50) NOT NULL,
-    `chat_channel` VARCHAR(50) NOT NULL,
+    `chat_channel` INT NOT NULL,
     `chat_creation_date` DATE NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`chat_author`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-    FOREIGN KEY (`chat_channel`) REFERENCES `channels`(`channel_name`) ON DELETE CASCADE
+    FOREIGN KEY (`chat_channel`) REFERENCES `channels`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `follows` (
