@@ -7,7 +7,8 @@ CREATE TABLE `users` (
     `profile_state_message` VARCHAR(300),
     `left_messenger` TINYINT(1) NOT NULL DEFAULT 0,
     `signup_date` DATE NOT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `channels` (
@@ -19,7 +20,8 @@ CREATE TABLE `channels` (
     `left_messenger` TINYINT(1) NOT NULL DEFAULT 0,
     `channel_creation_date` DATE NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`channel_creator`) REFERENCES `users`(`user_id`) ON DELETE CASCADE
+    FOREIGN KEY (`channel_creator`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+    UNIQUE KEY (`channel_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `chats` (
