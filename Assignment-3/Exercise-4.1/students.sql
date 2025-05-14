@@ -1,4 +1,5 @@
 CREATE TABLE `students` (
+    `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
     `entrance_year` YEAR NOT NULL,
     `college_code` VARCHAR(2) NOT NULL,  -- 국내대학 학점교류학생은 단과대 코드가 KU이므로 VARCHAR(2)로 설정
@@ -8,5 +9,6 @@ CREATE TABLE `students` (
     `address` VARCHAR(100),
     `cumulative_credits` INT NOT NULL DEFAULT 0,
     `gpa` FLOAT NOT NULL DEFAULT 0.0,
-    `is_in_school` TINYINT(1) NOT NULL DEFAULT TRUE
+    `is_in_school` TINYINT(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
